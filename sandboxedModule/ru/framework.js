@@ -6,7 +6,8 @@
 // Фреймворк может явно зависеть от библиотек через dependency lookup
 var fs = require('fs'),
     vm = require('vm'),
-    util = require('util');
+    util = require('util'),
+    app = require("./application.js");
 
 // Создаем контекст-песочницу, которая станет глобальным контекстом приложения
 var context = { module: {}, console: console, setInterval: setInterval, setTimeout: setTimeout, util:util,
@@ -25,8 +26,10 @@ console:{
     fs.appendFile("input.txt", date + "\n", function(err, info){
       if(err) throw err;
     });
-  }
-}, require: function(file){
+  },
+    dir: console.dir
+},
+    require: function(file){
     var result = require(file);
     var time = new Date();
     var date = time.getDate() + ":" +(time.getMonth()+1) + ":" + time.getFullYear() + " " + file;
@@ -48,11 +51,23 @@ else{
 
 fs.readFile(fileName, function(err, src) {
   // Тут нужно обработать ошибки
-  
+
+    console.log("Before load : ");
+    console.log(sandbox);
   // Запускаем код приложения в песочнице
   var script = vm.createScript(src, fileName);
   script.runInNewContext(sandbox);
   
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,
   // сохранить в кеш, вывести на экран исходный код приложения и т.д.
+    for(var f in sandbox.module.exports){
+        console.log(typeof sandbox.module.exports[f]);
+    }
+    console.log(sandbox.module.exports.f2.toString());
+
+    console.log("After load : ");
+    console.log(sandbox);
+
 });
+
+
