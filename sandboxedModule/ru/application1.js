@@ -3,9 +3,7 @@
 // кусочком фреймворка. Читайте README.md в нем задания.
 
 // Вывод из глобального контекста модуля
-var fs = require("fs");
-var vm = require('vm');
-console.log('From application global context');
+console.log('From application1 global context');
 
 setTimeout(function(){
   console.log("Hello from timer");
