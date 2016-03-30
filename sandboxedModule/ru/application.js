@@ -31,4 +31,4 @@ module.exports.f2 = function(a, b, c){
     return a * b * c;
   }
 
-console.dir(global);
+//console.dir(global);

@@ -63,7 +63,7 @@ fs.readFile(fileName, function(err, src) {
     for(var f in sandbox.module.exports){
         console.log(typeof sandbox.module.exports[f]);
     }
-    console.log(sandbox.module.exports.f2.toString());
+    //console.log(sandbox.module.exports.f2.toString());
 
     console.log("After load : ");
     console.log(sandbox);

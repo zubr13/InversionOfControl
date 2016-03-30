@@ -10,11 +10,21 @@ function timerEvent() {
 //setTimeout(timerEvent, 1000);
 
 var fileName = './README.md';
-console.log('Application going to read ' + fileName);
-fs.readFile(fileName, function(err, src) {
-  console.log('File ' + fileName + ' size ' + src.length);
-});
 
-fs.writeFile("new.txt", "something", function(){
-  console.log("Callback from writefile");
-});
+var read = function () {
+  console.log('Application going to read ' + fileName);
+  fs.readFile(fileName, function(err, src) {
+    console.log('File ' + fileName + ' size ' + src.length);
+  });
+}
+
+var fileName2 = "new.txt";
+var write = function(){
+  console.log("Writing file " + fileName2);
+  fs.writeFile(fileName2, "something", function(){
+    console.log("Callback from writefile");
+  });
+}
+
+setInterval(read, 5000);
+setInterval(write, 6000);
